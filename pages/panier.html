@@ -1,0 +1,133 @@
+<html lang="fr">
+    <head>
+        <meta charset="utf-8" />
+        <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+        <link rel="stylesheet" type="text/css" href="../css/style.css" />
+        <link rel="preconnect" href="https://fonts.gstatic.com" />
+        <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@300;400;700&display=swap" rel="stylesheet">
+
+        <script src="https://kit.fontawesome.com/93ea52f4d8.js" crossorigin="anonymous"></script>
+        <title>Orinoco - Panier</title>
+      </head>
+<body>
+    <!-- container principal -->
+    <div class="container">
+
+        <!-- header -->
+        <header>
+            <a href="../index.html"><img src="../images/logo_orinoco.png" alt="logo-orinoco"></a>
+            <nav>
+                <a href="../index.html">Accueil</a>
+                <a href="panier.html">Panier</a>
+            </nav>
+        </header>
+
+        <!-- main -->
+        <main>
+            <section class="intro">
+                <h1>
+                    Votre panier !
+                </h1>
+            </section>
+
+            <section class="panier">
+                <article class="card card--produit card--panier">
+                    <img src="/backend/images/vcam_1.jpg" alt="Vcam_1">
+                    <div class="card__texte card__texte--produit card__texte--panier">
+                        <h2>Vcam_1</h2>
+                        <p>Personnalisation</p>
+                        <p>€</p>
+                        <button class="btn btn--suppr"><a href="">Supprimer</a></button>
+                    </div>
+                </article>
+
+                <article>
+                    <div>
+                        <p>Total du panier</p>
+                        <p>€</p>
+                    </div>
+
+                </article>
+            </section>
+
+            <section class="coordonnees">
+                <h2>Saisissez vos coordonnées :</h2>
+                <form action="" method="POST" class="formulaire" id="coordonneesForm">
+                    <div class="champs">
+                        <label for="nom">Votre nom : </label>
+                        <input type="text" name="nom" required>
+                        <small></small>
+                    </div>
+
+                    <div class="champs">
+                        <label for="prenom">Votre prénom : </label>
+                        <input type="text" name="prenom" required>
+                        <small></small>
+                    </div>
+
+                    <div class="champs">
+                        <label for="email">Votre adresse email : </label>
+                        <input type="email" name="email">
+                        <small></small>
+                    </div>
+
+                    <div class="champs">
+                        <label for="tel">Votre numéro de téléphone : <i>(chiffres attachés)</i></label>
+                        <input type="tel" name="tel">
+                        <small></small>
+                    </div>
+
+                    <div class="champs">
+                        <label for="rue">Votre adresse : </label>
+                        <input type="text" name="rue" required>
+                        <small></small>
+                    </div>
+
+                    <div class="champs">
+                        <label for="cp">Votre code postal : </label>
+                        <input type="text" maxlength="5" name="cp" required>
+                        <small></small>
+                    </div>
+
+                    <div class="champs">
+                        <label for="ville">Votre ville : </label>
+                        <input type="text" name="ville" required>
+                        <small></small>
+                    </div>
+
+                    <div class="champs">
+                        <label for="pays">Votre pays : </label>
+                        <input type="text" name="pays" required>
+                        <small></small>
+                    </div>
+
+                    <button type="submit" class="btn btn--formulaire">Valider mes coordonnées</button>
+                </form>
+
+
+            </section>
+
+
+        </main>
+
+        <!-- footer -->
+        <footer>
+            <ul class="menu menu__footer">
+                <li>
+                    <a href="#">Contact</a>
+                </li>
+                <li>
+                    <a href="#">CGV</a>
+                </li>
+                <li>
+                    <a href="#">Mentions légales</a>
+                </li>
+            </ul>
+
+        </footer>
+
+    </div>
+    <script src="../regex.js"></script>
+
+</body>
+</html>
