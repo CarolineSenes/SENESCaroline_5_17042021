@@ -1,0 +1,32 @@
+.container{
+    max-width: 1400px;
+    flex-direction: column;
+    margin: auto;
+    width: 100%;
+}
+
+html{
+    box-sizing: border-box;
+}
+
+body, h1, h2, p, ul{
+    margin: 0;
+    padding: 0;
+}
+
+h1{
+    line-height: 3rem;
+    font-size: 2.5rem;
+}
+
+a{
+    color: currentColor;
+    text-decoration: none;
+    &:hover{
+        $cursor: cursor;
+    }
+}
+
+li{
+    list-style: none;
+}
