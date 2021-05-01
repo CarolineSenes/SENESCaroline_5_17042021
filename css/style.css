@@ -97,8 +97,8 @@ input {
   }
 }
 
-.card--produit--panier {
-  width: 50%;
+.card--panier {
+  flex-direction: column;
 }
 
 .card a {
@@ -141,6 +141,15 @@ input {
 
 .card__texte--produit {
   line-height: 2rem;
+}
+
+.card__texte--panier {
+  flex-direction: row;
+  justify-content: space-between;
+}
+
+.card__texte--paniervide {
+  align-items: center;
 }
 
 header {

@@ -54,7 +54,6 @@ fetch(`http://localhost:3000/api/cameras/${produitId}`)
             .addEventListener("submit", function(e){
                 e.preventDefault()
                 let selectionOption = e.target.lentilles.value
-
                 console.log(`Option sélectionnée :`, selectionOption)
 
             //Récupération des valeurs du formulaire dans un objet
@@ -70,11 +69,11 @@ fetch(`http://localhost:3000/api/cameras/${produitId}`)
 
             //LOCALSTORAGE
 
-            //Stocker dans une variable les valeurs récupérées dans le localStorage enconvertissant les données en JS
+            //Stocker dans une variable les valeurs récupérées dans le localStorage en convertissant les données en JS
             let valeursStockees = JSON.parse(localStorage.getItem("produit"));
 
             //fonction pop up
-            const popupConfirmation = () =>{
+            const popupConfirmation = function(){
                 if(window.confirm(`L'appareil photo ${produit.name} avec l'option: ${selectionOption} a bien été ajouté au panier.
                 Consulter le panier : OK
                 Revenir à l'accueil : ANNULER`)){
@@ -84,60 +83,28 @@ fetch(`http://localhost:3000/api/cameras/${produitId}`)
                 }
             }
 
-            //S'il y A déjà des produits dans le localStorage, condition sera true
-            if(valeursStockees){
+            //fonction pour ajouter produit dans localStorage
                 //on push les valeurs de la variable optionsProduit dans le tableau déjà créé
+                //on stocke le tableau des valeurs dans le localStorage en convertissant les données en JSON
+            const ajoutProduitLocalStorage = function(){
                 valeursStockees.push(optionsProduit);
                 localStorage.setItem("produit", JSON.stringify(valeursStockees));
+            }
+
+            //S'il y A déjà des produits dans le localStorage, condition sera true
+            if(valeursStockees){
+                ajoutProduitLocalStorage();
                 popupConfirmation();
 
             // S'il n'y a PAS de produits enregistrés dans le localStorage, condition sera false   
             }else{
                 //on créé un tableau vide pour y mettre les valeurs de la variable optionsProduit
                 valeursStockees = [];
-                valeursStockees.push(optionsProduit);
-                //on stocke le tableau des valeurs dans le localStorage en convertissant les données en JSON
-                localStorage.setItem("produit", JSON.stringify(valeursStockees));
+                ajoutProduitLocalStorage();
                 popupConfirmation();
 
             }
 
-
-
-            // //The condition of the empty basket is True
-            // if (localStorage.length == 0) {
-            //     //console.log("Panier vide")
-
-            //     //Object added to basket
-            //     let newBasketObjects = []
-            //     newBasketObjects.push(optionsProduit);
-
-            //     //Object transformed from JSON
-            //     let basketProducts = JSON.stringify(newBasketObjects)
-
-            //     //LocalStorage created with the object
-            //     localStorage.setItem('basket', basketProducts)
-
-            // //The condition of the empty basket is False
-            // }else{
-            //     //console.log("Panier déjà rempli")
-
-            //     //Basket retrieved and transformed into JSON
-            //     let oldBasket = localStorage.getItem('basket')
-
-            //     let newBasketObjects = JSON.parse(oldBasket)
-
-            //     //Object added to basket
-            //     newBasketObjects.push(optionsProduit);
-            //     //console.log(newBasketObjects)
-
-
-            //     let basketProducts = JSON.stringify(newBasketObjects)
-            //     //console.log(basketProducts)
-
-            //     //LocalStorage added
-            //     localStorage.setItem('basket', basketProducts)
-            // }
         })
     })
 

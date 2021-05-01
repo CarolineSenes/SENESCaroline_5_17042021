@@ -30,23 +30,14 @@
                 </h1>
             </section>
 
-            <section class="panier">
-                <article class="card card--produit card--panier">
-                    <img src="/backend/images/vcam_1.jpg" alt="Vcam_1">
-                    <div class="card__texte card__texte--produit card__texte--panier">
-                        <h2>Vcam_1</h2>
-                        <p>Personnalisation</p>
-                        <p>€</p>
-                        <button class="btn btn--suppr"><a href="">Supprimer</a></button>
-                    </div>
-                </article>
+            <section id="panier">
+                <article id="recap-panier" class="card card--produit card--panier"></article>
 
-                <article>
-                    <div>
-                        <p>Total du panier</p>
-                        <p>€</p>
+                <article id="total-panier" class="card card--panier">
+                    <div class="card__texte card__texte--produit">
+                        <p>Total du panier = €</p>
+                        <button class="btn btn--suppr"><a href="">Vider le panier</a></button>
                     </div>
-
                 </article>
             </section>
 
@@ -128,6 +119,7 @@
 
     </div>
     <script src="../regex.js"></script>
+    <script src="../panier.js"></script>
 
 </body>
 </html>

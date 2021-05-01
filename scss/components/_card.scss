@@ -11,10 +11,10 @@
         @media screen and (max-width: 500px){
             flex-direction: column;
         }
-    &--panier{
-        width: 50%;
     }
-    } 
+    &--panier{
+        flex-direction: column;
+    }
     a{
         display: flex;
         justify-content: space-between;
@@ -41,7 +41,14 @@
             align-items: flex-start;
         }
         &--produit{
-                    line-height: 2rem;
+            line-height: 2rem;
+        }
+        &--panier{
+            flex-direction: row;
+            justify-content: space-between;
+        }
+        &--paniervide{
+            align-items: center;
         }
     }
 }
