@@ -31,71 +31,19 @@
             </section>
 
             <section id="panier">
-                <article id="recap-panier" class="card card--produit card--panier"></article>
+                <article id="recap-panier" class="card card--produit card--panier">
+                    <!-- <button class="btn btn--suppr supprProduit"><a href="">Supprimer</a></button> -->
+                </article>
 
                 <article id="total-panier" class="card card--panier">
-                    <div class="card__texte card__texte--produit">
-                        <p>Total du panier = €</p>
-                        <button class="btn btn--suppr"><a href="">Vider le panier</a></button>
-                    </div>
+                    <!-- <button class="btn btn--suppr"><a href="">Vider le panier</a></button> -->
                 </article>
             </section>
 
             <section class="coordonnees">
                 <h2>Saisissez vos coordonnées :</h2>
-                <form action="" method="POST" class="formulaire" id="coordonneesForm">
-                    <div class="champs">
-                        <label for="nom">Votre nom : </label>
-                        <input type="text" name="nom" required>
-                        <small></small>
-                    </div>
-
-                    <div class="champs">
-                        <label for="prenom">Votre prénom : </label>
-                        <input type="text" name="prenom" required>
-                        <small></small>
-                    </div>
-
-                    <div class="champs">
-                        <label for="email">Votre adresse email : </label>
-                        <input type="email" name="email">
-                        <small></small>
-                    </div>
-
-                    <div class="champs">
-                        <label for="tel">Votre numéro de téléphone : <i>(chiffres attachés)</i></label>
-                        <input type="tel" name="tel">
-                        <small></small>
-                    </div>
-
-                    <div class="champs">
-                        <label for="rue">Votre adresse : </label>
-                        <input type="text" name="rue" required>
-                        <small></small>
-                    </div>
-
-                    <div class="champs">
-                        <label for="cp">Votre code postal : </label>
-                        <input type="text" maxlength="5" name="cp" required>
-                        <small></small>
-                    </div>
-
-                    <div class="champs">
-                        <label for="ville">Votre ville : </label>
-                        <input type="text" name="ville" required>
-                        <small></small>
-                    </div>
-
-                    <div class="champs">
-                        <label for="pays">Votre pays : </label>
-                        <input type="text" name="pays" required>
-                        <small></small>
-                    </div>
-
-                    <button type="submit" class="btn btn--formulaire">Valider mes coordonnées</button>
+                <form action="" method="POST" class="formulaire" id="formulaireCommande">
                 </form>
-
-
             </section>
 
 
@@ -118,7 +66,7 @@
         </footer>
 
     </div>
-    <script src="../regex.js"></script>
+    <!-- <script src="../regex.js"></script> -->
     <script src="../panier.js"></script>
 
 </body>

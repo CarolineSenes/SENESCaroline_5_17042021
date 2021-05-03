@@ -16,7 +16,7 @@ fetch(`http://localhost:3000/api/cameras/${produitId}`)
 
 	    //Conversion du prix
 		let entierPrice = produit.price /100
-  		let finalPrice = new Intl.NumberFormat('fr-FR', { style: 'currency', currency: 'EUR' }).format(entierPrice)
+  		//let finalPrice = new Intl.NumberFormat('fr-FR', { style: 'currency', currency: 'EUR' }).format(entierPrice)
 
 	    //On intègre le HTML
         document.getElementById("produit").innerHTML += 
@@ -29,7 +29,7 @@ fetch(`http://localhost:3000/api/cameras/${produitId}`)
                     <label for="lentilles">Personnalisation de lentille : </label>
                     <select name="lentilles" id="lentilles"></select>
                 </p>    
-                <p>${finalPrice}</p>
+                <p>${entierPrice} €</p>
                 <button type="submit" id="ajoutPanier" class="btn btn--panier">Ajouter au panier</button>
             </div>
         </form>`
@@ -61,7 +61,7 @@ fetch(`http://localhost:3000/api/cameras/${produitId}`)
                 id : produit._id,
                 imageUrl : produit.imageUrl,
                 name : produit.name,
-                price : finalPrice,
+                price : entierPrice,
                 lentilles : selectionOption,
             }
             console.log(`Les options :`, optionsProduit);
@@ -70,7 +70,7 @@ fetch(`http://localhost:3000/api/cameras/${produitId}`)
             //LOCALSTORAGE
 
             //Stocker dans une variable les valeurs récupérées dans le localStorage en convertissant les données en JS
-            let valeursStockees = JSON.parse(localStorage.getItem("produit"));
+            let produitsValues = JSON.parse(localStorage.getItem("produit"));
 
             //fonction pop up
             const popupConfirmation = function(){
@@ -85,21 +85,21 @@ fetch(`http://localhost:3000/api/cameras/${produitId}`)
 
             //fonction pour ajouter produit dans localStorage
                 //on push les valeurs de la variable optionsProduit dans le tableau déjà créé
-                //on stocke le tableau des valeurs dans le localStorage en convertissant les données en JSON
+                //on stocke le tableau des valeurs dans le localStorage en convertissant les données en string
             const ajoutProduitLocalStorage = function(){
-                valeursStockees.push(optionsProduit);
-                localStorage.setItem("produit", JSON.stringify(valeursStockees));
+                produitsValues.push(optionsProduit);
+                localStorage.setItem("produit", JSON.stringify(produitsValues));
             }
 
             //S'il y A déjà des produits dans le localStorage, condition sera true
-            if(valeursStockees){
+            if(produitsValues){
                 ajoutProduitLocalStorage();
                 popupConfirmation();
 
             // S'il n'y a PAS de produits enregistrés dans le localStorage, condition sera false   
             }else{
                 //on créé un tableau vide pour y mettre les valeurs de la variable optionsProduit
-                valeursStockees = [];
+                produitsValues = [];
                 ajoutProduitLocalStorage();
                 popupConfirmation();
 

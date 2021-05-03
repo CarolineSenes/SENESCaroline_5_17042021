@@ -9,7 +9,7 @@ fetch('http://localhost:3000/api/cameras')
 
 	    //Conversion du prix
 		let entierPrice = produit.price /100
-  		let finalPrice = new Intl.NumberFormat('fr-FR', { style: 'currency', currency: 'EUR' }).format(entierPrice)
+  		//let finalPrice = new Intl.NumberFormat('fr-FR', { style: 'currency', currency: 'EUR' }).format(entierPrice)
 
 	    //On intègre le HTML
 		document.getElementById("catalogue").innerHTML += 
@@ -18,7 +18,7 @@ fetch('http://localhost:3000/api/cameras')
                 <img src=${produit.imageUrl} alt="${produit.name}" id="article__img" />
                 <div class="card__texte">
                     <h2 id="article__name">${produit.name}</h2>
-                    <p id="article__price">${finalPrice}</p>
+                    <p id="article__price">${entierPrice} €</p>
                 </div>
             </a>
         </article>`
