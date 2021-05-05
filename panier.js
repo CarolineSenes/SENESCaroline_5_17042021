@@ -52,6 +52,9 @@ const reducer = function(accumulator, currentValue) {
 const prixTotal = totalPanier.reduce(reducer,0); //0 = valeur initiale obligatoire
 console.log('TOTAL du panier :', prixTotal);
 
+//On envoie le prix total au localStorage
+localStorage.setItem("prixTotal", JSON.stringify(prixTotal));
+
 //On intègre le HTML
 document.getElementById("total-panier").innerHTML += 
 `<div class="card__texte card__texte--produit">
@@ -62,41 +65,44 @@ document.getElementById("total-panier").innerHTML +=
 //////////////////////////////////////////// FORMULAIRE COMMANDE ////////////////////////////////////////
 
 //On intègre le HTML
-document.getElementById("formulaireCommande").innerHTML += 
-    `<div class="champs">
-        <label for="nom">Votre nom : </label><small id='messageNom' class='text-danger'></small>
-        <input type="text" id="lastName" name="lastName" required>
-        
-    </div>
+document.getElementById("coordonnees").innerHTML += 
+    `<h2>Saisissez vos coordonnées :</h2>
+    <form action="" method="POST" class="formulaire" id="formulaireCommande">
+        <div class="champs">
+            <label for="nom">Votre nom : </label><small id='messageNom' class='text-danger'></small>
+            <input type="text" id="lastName" name="lastName" required>
+            
+        </div>
 
-    <div class="champs">
-        <label for="prenom">Votre prénom : </label><small id='messagePrenom' class='text-danger'></small>
-        <input type="text" id="firstName" name="firstName" required>
-    </div>
+        <div class="champs">
+            <label for="prenom">Votre prénom : </label><small id='messagePrenom' class='text-danger'></small>
+            <input type="text" id="firstName" name="firstName" required>
+        </div>
 
-    <div class="champs">
-        <label for="email">Votre adresse email : </label><small id='messageEmail' class='text-danger'></small>
-        <input type="email" id="email" name="email">
-        <small></small>
-    </div>
+        <div class="champs">
+            <label for="email">Votre adresse email : </label><small id='messageEmail' class='text-danger'></small>
+            <input type="email" id="email" name="email">
+            <small></small>
+        </div>
 
-    <div class="champs">
-        <label for="rue">Votre adresse : </label><small id='messageAdresse' class='text-danger'></small>
-        <input type="text" id="address" name="address" required>
-    </div>
+        <div class="champs">
+            <label for="rue">Votre adresse : </label><small id='messageAdresse' class='text-danger'></small>
+            <input type="text" id="address" name="address" required>
+        </div>
 
-    <div class="champs">
-        <label for="codePostal">Votre code postal : </label><small id='messageCodePostal' class='text-danger'></small>
-        <input type="text" id="codePostal" maxlength="5" name="codePostal" required>
-    </div>
+        <div class="champs">
+            <label for="codePostal">Votre code postal : </label><small id='messageCodePostal' class='text-danger'></small>
+            <input type="text" id="codePostal" maxlength="5" name="codePostal" required>
+        </div>
 
-    <div class="champs">
-        <label for="ville">Votre ville : </label><small id='messageVille' class='text-danger'></small>
-        <input type="text" id="city" name="city" required>
-    </div>
+        <div class="champs">
+            <label for="ville">Votre ville : </label><small id='messageVille' class='text-danger'></small>
+            <input type="text" id="city" name="city" required>
+        </div>
 
-    <button type="submit" id="order" name="order" class="btn btn--formulaire">Valider mes coordonnées</button>`;
-
+        <button type="submit" id="order" name="order" class="btn btn--formulaire">Valider mes coordonnées</button>
+    </form>`;
+    
 
 //On récupère les données du formulaire    
 
@@ -216,46 +222,84 @@ document
         };
 
 
-        //POST
-        async function sendForm() {
-            try {
-                //on envoie au localStorage l'objet contact
-                console.log(`Objet "contact"`, contact);
-                localStorage.setItem("contact", JSON.stringify(contact));
-
-                //on envoie au localStorage le tableau des id produits du panier
-                let products = [];
+        ////////////////////////////////////// POST //////////////////////////////////////////////////////
+        
+        function sendForm(){
+            //On envoie les id des produits dans un tableau
+            let products = []
                 panier.forEach(product => {
-                    products.push(product.id)
-                })
-                console.log(`Tableau "product_id"`, products);
-                localStorage.setItem("products", JSON.stringify(products));
-
-                //création d'un objet qui contient contact et id (voir body du POST)
-                const request = {
-                    contact : contact,
-                    products : products,
-                }
-                console.log('Request', request)
-
-                //on envoie l'objet request au serveur
-                let response = await fetch("http://localhost:3000/api/cameras/order", {
-                    method: "POST",
-                    headers: {
-                    "Content-Type": "application/json"
-                    },
-                    body: JSON.stringify(request),
+                products.push(product.id)
                 });
-              
-                if (response.ok) {
-                    window.location.href = "confirmation.html";
-                    console.log(response);
-                } else {
-                    console.log ("err");
+            console.log(`Tableau "product_id" : `, products);
+
+            //on regroupe l'objet contact et le tableau des id products
+            const aEnvoyer = {
+                contact : contact,
+                products : products,
+            };
+            console.log('Données à envoyer : ', aEnvoyer);
+
+            //on envoie nos données au serveur
+            fetch("http://localhost:3000/api/cameras/order", {
+                method: "POST",
+                headers: {
+                "Content-Type": "application/json"
+                },
+                body: JSON.stringify(aEnvoyer),
+            })
+            .then(function(res) {
+                if (res.ok){
+                    return res.json();
                 }
-            }
-            catch (e) {
-                console.log(e);
-            }
+            })
+            .then(function(res) {
+                let order = JSON.stringify(res)
+                localStorage.setItem('order', order)
+                console.log('Réponse serveur format JSON :', order)
+                window.location.href = 'confirmation.html';
+            })
+            .catch(function() {
+                alert('Impossible d\'envoyer la requête');
+            })
         }
+        // async function sendForm() {
+        //     try {
+        //         //on envoie au localStorage l'objet contact
+        //         console.log(`Objet "contact"`, contact);
+        //         localStorage.setItem("contact", JSON.stringify(contact));
+
+        //         //on envoie au localStorage le tableau des id produits du panier
+        //         let products = [];
+        //         panier.forEach(product => {
+        //             products.push(product.id)
+        //         })
+        //         console.log(`Tableau "product_id"`, products);
+        //         localStorage.setItem("products", JSON.stringify(products));
+
+        //         //création d'un objet qui contient contact et id (voir body du POST)
+        //         const request = {
+        //             contact : contact,
+        //             products : products,
+        //         }
+        //         console.log('Request', request)
+
+        //         let response = await fetch("http://localhost:3000/api/cameras/order", {
+        //             method: "POST",
+        //             headers: {
+        //             "Content-Type": "application/json"
+        //             },
+        //             body: JSON.stringify(request),
+        //         });
+              
+        //         if (response.ok) {
+        //             window.location.href = "confirmation.html";
+        //             console.log(response);
+        //         } else {
+        //             console.log ("err");
+        //         }
+        //     }
+        //     catch (e) {
+        //         console.log(e);
+        //     }
+        // }
     });

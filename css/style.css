@@ -239,6 +239,7 @@ footer ul {
   margin: auto;
   margin-top: 2rem;
   margin-bottom: 2rem;
+  border-radius: 25px;
 }
 
 .formulaire {
