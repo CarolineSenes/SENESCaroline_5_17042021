@@ -14,7 +14,7 @@ fetch('http://localhost:3000/api/cameras')
 	    //On intègre le HTML
 		document.getElementById("catalogue").innerHTML += 
         `<article class="card">
-            <a href="./pages/produit.html?id=${produit._id}" id="article__link">
+            <a href="./pages/produit.html?given_id=${produit._id}" id="article__link">
                 <img src=${produit.imageUrl} alt="${produit.name}" id="article__img" />
                 <div class="card__texte">
                     <h2 id="article__name">${produit.name}</h2>

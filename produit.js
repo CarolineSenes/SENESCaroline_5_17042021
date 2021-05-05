@@ -1,6 +1,6 @@
 //On récupère l'ID dans l'URL
 const parametresUrl = new URLSearchParams(window.location.search) 
-const produitId = parametresUrl.get("id") 
+const produitId = parametresUrl.get("given_id") 
 console.log(`L'id du produit est :`, produitId)
 
 
@@ -11,20 +11,20 @@ fetch(`http://localhost:3000/api/cameras/${produitId}`)
     })
 
     //On récupère le produit
-    .then(function(produit){
-        console.log(`Les data du produits sont :`, produit)
+    .then(function(article){
+        console.log(`Les data du produits sont :`, article)
 
 	    //Conversion du prix
-		let entierPrice = produit.price /100
+		let entierPrice = article.price /100
   		//let finalPrice = new Intl.NumberFormat('fr-FR', { style: 'currency', currency: 'EUR' }).format(entierPrice)
 
 	    //On intègre le HTML
         document.getElementById("produit").innerHTML += 
         `<form class="card card--produit">
-            <img src=${produit.imageUrl} alt="${produit.name}">
+            <img src=${article.imageUrl} alt="${article.name}">
             <div id="carte_produit" class="card__texte card__texte--produit">
-                <h2>${produit.name}</h2>
-                <p>${produit.description}</p>
+                <h2>${article.name}</h2>
+                <p>${article.description}</p>
                 <p>
                     <label for="lentilles">Personnalisation de lentille : </label>
                     <select name="lentilles" id="lentilles"></select>
@@ -35,12 +35,12 @@ fetch(`http://localhost:3000/api/cameras/${produitId}`)
         </form>`
 
 
-        //OPTIONS
+        //PERSONNALISATION
 
-        console.log(`La liste des options est :`, produit.lenses)
+        console.log(`La liste des options est :`, article.lenses)
 
         //On intègre chaque option de lentilles (=data lenses) dans le HTML
-        produit.lenses.forEach(option =>{
+        article.lenses.forEach(option =>{
             console.log(`Choix d'option :`, option)
             document.getElementById("lentilles").innerHTML += 
             `<option value="${option}">${option}</option>`
@@ -53,28 +53,28 @@ fetch(`http://localhost:3000/api/cameras/${produitId}`)
             .querySelector('form')
             .addEventListener("submit", function(e){
                 e.preventDefault()
-                let selectionOption = e.target.lentilles.value
-                console.log(`Option sélectionnée :`, selectionOption)
+                let optionLentille = e.target.lentilles.value
+                console.log(`Option sélectionnée :`, optionLentille)
 
             //Récupération des valeurs du formulaire dans un objet
-            let optionsProduit = {
-                id : produit._id,
-                imageUrl : produit.imageUrl,
-                name : produit.name,
+            let panierObjet = {
+                id : article._id,
+                imageUrl : article.imageUrl,
+                name : article.name,
                 price : entierPrice,
-                lentilles : selectionOption,
+                lentilles : optionLentille,
             }
-            console.log(`Les options :`, optionsProduit);
+            console.log(`Les options :`, panierObjet);
 
 
             //LOCALSTORAGE
 
             //Stocker dans une variable les valeurs récupérées dans le localStorage en convertissant les données en JS
-            let produitsValues = JSON.parse(localStorage.getItem("produit"));
+            let produitsValues = JSON.parse(localStorage.getItem("produits"));
 
             //fonction pop up
             const popupConfirmation = function(){
-                if(window.confirm(`L'appareil photo ${produit.name} avec l'option: ${selectionOption} a bien été ajouté au panier.
+                if(window.confirm(`L'appareil photo ${article.name} avec l'option: ${optionLentille} a bien été ajouté au panier.
                 Consulter le panier : OK
                 Revenir à l'accueil : ANNULER`)){
                     window.location.href = "panier.html";
@@ -84,11 +84,11 @@ fetch(`http://localhost:3000/api/cameras/${produitId}`)
             }
 
             //fonction pour ajouter produit dans localStorage
-                //on push les valeurs de la variable optionsProduit dans le tableau déjà créé
+                //on push les valeurs de la variable panierObjet dans le tableau déjà créé
                 //on stocke le tableau des valeurs dans le localStorage en convertissant les données en string
             const ajoutProduitLocalStorage = function(){
-                produitsValues.push(optionsProduit);
-                localStorage.setItem("produit", JSON.stringify(produitsValues));
+                produitsValues.push(panierObjet);
+                localStorage.setItem("produits", JSON.stringify(produitsValues));
             }
 
             //S'il y A déjà des produits dans le localStorage, condition sera true
@@ -98,7 +98,7 @@ fetch(`http://localhost:3000/api/cameras/${produitId}`)
 
             // S'il n'y a PAS de produits enregistrés dans le localStorage, condition sera false   
             }else{
-                //on créé un tableau vide pour y mettre les valeurs de la variable optionsProduit
+                //on créé un tableau vide pour y mettre les valeurs de la variable panierObjet
                 produitsValues = [];
                 ajoutProduitLocalStorage();
                 popupConfirmation();

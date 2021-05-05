@@ -1,13 +1,13 @@
-//Stocker dans une variable les valeurs récupérées dans le localStorage enconvertissant les données en JS
-let produitsValues = JSON.parse(localStorage.getItem("produit"));
-console.log('Le localStorage contient les éléments : ', produitsValues);
+//On récupère les données stockées dans le localstorage
+const panier = JSON.parse(localStorage.getItem('produits'));
+console.log('Le localStorage contient les éléments : ', panier);
 
 
-//AFFICHER PRODUITS DU PANIER
+//////////////////////////////////////// AFFICHER PRODUITS DU PANIER ////////////////////////////////////
 
 //Si panier vide
-if(produitsValues === null){
-    document.getElementById("panier").innerHTML += 
+if(panier === null){
+    document.getElementById('panier').innerHTML += 
     `<article id="etat-panier" class="card card--panier-vide">
         <div class="card__texte card__texte--paniervide">
             <p>Le panier est vide</p>
@@ -20,60 +20,58 @@ if(produitsValues === null){
     console.log('Le panier n\'est PAS vide');
 
     //On récupère les produits
-    for (let valeurStockee of produitsValues){
-        console.log(`Le panier contient`, produitsValues.length, `produits`);
+    for (let article of panier){
+        console.log(`Le panier contient`, panier.length, `articles`);
         
         //on intègre le HTML pour chacun
         document.getElementById("recap-panier").innerHTML += 
         `<div class="card__texte card__texte--produit card__texte--panier">
-                <h2>${valeurStockee.name}</h2>
-                <p>${valeurStockee.lentilles}</p>
-                <p>${valeurStockee.price} €</p>
+                <h2>${article.name}</h2>
+                <p>${article.lentilles}</p>
+                <p>${article.price} €</p>
         </div>`;
     }
 }
 
-//btn suppr/article non fonctionnels (optionnels)
 
+//////////////////////////////////////////////// TOTAL DU PANIER /////////////////////////////////////////
 
-//TOTAL DU PANIER
-
-//on créé un tableau vide
+//On créé un tableau vide
 let totalPanier = [];
 
-//on créé un boucle pour push chq prix au tableau à chq tour de boucle
-for (let valeurStockee of produitsValues){
-    totalPanier.push(valeurStockee.price)
-    console.log(`Push au panier :`, totalPanier);
-}
+//On créé une boucle pour push chq prix au tableau à chq tour de boucle
+for (let article of panier){
+    totalPanier.push(article.price)
+    console.log(`Push prix au panier :`, totalPanier);
+};
 
-//addition des prix présents dans le tableau totalPanier
+//Addition des prix présents dans le tableau totalPanier
 const reducer = function(accumulator, currentValue) {
      return accumulator + currentValue
 };
 const prixTotal = totalPanier.reduce(reducer,0); //0 = valeur initiale obligatoire
-console.log(prixTotal);
+console.log('TOTAL du panier :', prixTotal);
 
-//on intègre le HTML
+//On intègre le HTML
 document.getElementById("total-panier").innerHTML += 
 `<div class="card__texte card__texte--produit">
     <p>Total du panier = ${prixTotal} €</p>
 </div>`;
 
 
-//FORMULAIRE COMMANDE
+//////////////////////////////////////////// FORMULAIRE COMMANDE ////////////////////////////////////////
 
-//on intègre le HTML
+//On intègre le HTML
 document.getElementById("formulaireCommande").innerHTML += 
     `<div class="champs">
         <label for="nom">Votre nom : </label><small id='messageNom' class='text-danger'></small>
-        <input type="text" id="nom" name="nom" required>
+        <input type="text" id="lastName" name="lastName" required>
         
     </div>
 
     <div class="champs">
         <label for="prenom">Votre prénom : </label><small id='messagePrenom' class='text-danger'></small>
-        <input type="text" id="prenom" name="prenom" required>
+        <input type="text" id="firstName" name="firstName" required>
     </div>
 
     <div class="champs">
@@ -84,7 +82,7 @@ document.getElementById("formulaireCommande").innerHTML +=
 
     <div class="champs">
         <label for="rue">Votre adresse : </label><small id='messageAdresse' class='text-danger'></small>
-        <input type="text" id="rue" name="rue" required>
+        <input type="text" id="address" name="address" required>
     </div>
 
     <div class="champs">
@@ -94,48 +92,46 @@ document.getElementById("formulaireCommande").innerHTML +=
 
     <div class="champs">
         <label for="ville">Votre ville : </label><small id='messageVille' class='text-danger'></small>
-        <input type="text" id="ville" name="ville" required>
+        <input type="text" id="city" name="city" required>
     </div>
 
-    <button type="submit" id="envoyerFormulaire" name="envoyerFormulaire" class="btn btn--formulaire">Valider mes coordonnées</button>`;
+    <button type="submit" id="order" name="order" class="btn btn--formulaire">Valider mes coordonnées</button>`;
 
 
-//RECUPERATION DES VALEURS DU FORMULAIRE    
+//On récupère les données du formulaire    
 
 document
-    .getElementById("envoyerFormulaire")
-    .addEventListener("click", function(e){
+    .getElementById("formulaireCommande")
+    .addEventListener("submit", function(e){
         e.preventDefault();
         //On récupère les valeurs dans un objet
-        const formulaireValues = {
-            nom : document.getElementById("nom").value,
-            prenom : document.getElementById("prenom").value,
+        const contact = {
+            lastName : document.getElementById("lastName").value,
+            firstName : document.getElementById("firstName").value,
             email : document.getElementById("email").value,
-            rue : document.getElementById("rue").value,
-            codePostal : document.getElementById("codePostal").value,
-            ville : document.getElementById("ville").value,
-        }
+            address : document.getElementById("address").value,
+            // codePostal : document.getElementById("codePostal").value,
+            city : document.getElementById("city").value,
+        };
 
         //Validation du formulaire avant envoi
+        ///définition des regex
         const regExPrenomNomVille = function(value){
             return /^[a-zA-Z-\s]{3,20}$/.test(value);
-        }
+        };
         const regExCodePostal = function(value){
             return /^[0-9]{5}$/.test(value);
-        }
+        };
 
         const regExEmail = function(value){
             return /^[a-zA-Z0-9_.-]+[@]{1}[a-zA-Z0-9_.-]+[.]{1}[a-zA-Z]{2,10}$/.test(value);
-        }
+        };
 
         const regExAdresse = function(value){
             return /^[a-zA-Z0-9\s]{5,50}$/.test(value);
-        }
+        };
 
-        const textAlert = function(value){
-            return `${value} Uniquement lettres et - autorisés (entre 3 et 20 caractères)`;
-        }
-
+        ///définition des messages d'erreurs
         function dataChampManquantTextVide(e){
             document.querySelector(`#${e}`).textContent = "";
         };
@@ -144,22 +140,20 @@ document
             document.querySelector(`#${e}`).textContent = "Le format de ce champ n'est pas correct";
         };
 
-        function nomControle(){
-            //contrôle validité du nom
-            const leNom = formulaireValues.nom;
+        ///tests des champs
+        function lastNameControl(){
+            const leNom = contact.lastName;
             if(regExPrenomNomVille(leNom)){
                 dataChampManquantTextVide("messageNom");
                 return true;
             }else{
-                document
                 dataChampManquantText("messageNom");
                 return false;
             }
         };
 
-        function prenomControle(){
-            //contrôle validité du prénom
-            const lePrenom = formulaireValues.prenom;
+        function firstNameControl(){
+            const lePrenom = contact.firstName;
             if(regExPrenomNomVille(lePrenom)){
                 dataChampManquantTextVide("messagePrenom");
                 return true;
@@ -169,9 +163,8 @@ document
             }
         };
 
-        function emailControle(){
-            //contrôle validité du email
-            const leEmail = formulaireValues.email;
+        function emailControl(){
+            const leEmail = contact.email;
             if(regExEmail(leEmail)){
                 dataChampManquantTextVide("messageEmail");
                 return true;
@@ -181,9 +174,8 @@ document
             }
         };
 
-        function adresseControle(){
-            //contrôle validité du adresse
-            const leAdresse = formulaireValues.rue;
+        function adressControl(){
+            const leAdresse = contact.address;
             if(regExAdresse(leAdresse)){
                 dataChampManquantTextVide("messageAdresse");
                 return true;
@@ -193,21 +185,19 @@ document
             }
         };
 
-        function codePostalControle(){
-            //contrôle validité du code postal
-            const leCodePostal = formulaireValues.codePostal;
-            if(regExCodePostal(leCodePostal)){
-                dataChampManquantTextVide("messageCodePostal");
-                return true;
-            }else{
-                dataChampManquantText("messageCodePostal");
-                return false;
-            }
-        };
+        // function codePostalControl(){
+        //     const leCodePostal = contact.codePostal;
+        //     if(regExCodePostal(leCodePostal)){
+        //         dataChampManquantTextVide("messageCodePostal");
+        //         return true;
+        //     }else{
+        //         dataChampManquantText("messageCodePostal");
+        //         return false;
+        //     }
+        // };
 
-        function villeControle(){
-            //contrôle validité de la ville
-            const leVille = formulaireValues.ville;
+        function cityControl(){
+            const leVille = contact.city;
             if(regExPrenomNomVille(leVille)){
                 dataChampManquantTextVide("messageVille");
                 return true;
@@ -217,21 +207,55 @@ document
             }
         };
         
-        //contrôle validiter formulaire avant envoi dans localStorage
-        if(nomControle() && prenomControle() && emailControle() && adresseControle() && codePostalControle() && villeControle()){
-            //Mettre l'objet formulaireValues dans localStorage pour regrouper les valeurs
-            localStorage.setItem('formulaireValues', JSON.stringify(formulaireValues));
+        ///Contrôle validité formulaire avant envoi dans localStorage
+        if(lastNameControl() && firstNameControl() && emailControl() && adressControl() && cityControl()){
+            //On appelle la fonction de POST
+            sendForm()
         }else{
-            alert('Veuillez bien remplir le formulaire');
+            console.log(`ERR : Le formulaire n'est pas bien rempli`);
         };
 
-        //On met formulaireValues + produitsValues dans un objet pour envoi au localStorage
-        const aEnvoyer =  {
-            produitsValues,
-            formulaireValues
+
+        //POST
+        async function sendForm() {
+            try {
+                //on envoie au localStorage l'objet contact
+                console.log(`Objet "contact"`, contact);
+                localStorage.setItem("contact", JSON.stringify(contact));
+
+                //on envoie au localStorage le tableau des id produits du panier
+                let products = [];
+                panier.forEach(product => {
+                    products.push(product.id)
+                })
+                console.log(`Tableau "product_id"`, products);
+                localStorage.setItem("products", JSON.stringify(products));
+
+                //création d'un objet qui contient contact et id (voir body du POST)
+                const request = {
+                    contact : contact,
+                    products : products,
+                }
+                console.log('Request', request)
+
+                //on envoie l'objet request au serveur
+                let response = await fetch("http://localhost:3000/api/cameras/order", {
+                    method: "POST",
+                    headers: {
+                    "Content-Type": "application/json"
+                    },
+                    body: JSON.stringify(request),
+                });
+              
+                if (response.ok) {
+                    window.location.href = "confirmation.html";
+                    console.log(response);
+                } else {
+                    console.log ("err");
+                }
+            }
+            catch (e) {
+                console.log(e);
+            }
         }
-        console.log(`A envoyer au serveur :`, aEnvoyer);
     });
-
-    
-
