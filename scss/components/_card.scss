@@ -14,6 +14,10 @@
     }
     &--panier{
         flex-direction: column;
+        @media screen and (max-width: 500px){
+            margin-left: 10px;
+            margin-right: 10px;
+        }    
     }
     a{
         display: flex;
@@ -39,6 +43,7 @@
         padding: 20px;
         @media screen and (max-width: 500px){
             align-items: flex-start;
+            font-size: 90%;
         }
         &--produit{
             line-height: 2rem;

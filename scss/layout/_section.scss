@@ -1,11 +1,10 @@
-
 .intro{
     margin-top: 3rem;
     margin-bottom: 3rem;
     padding: 0rem 1rem;
     display: flex;
     flex-direction: column;
-    align-items: center;
+    text-align: center;
         h1{
             @media screen and (max-width: 500px){
                 flex-direction: column;
@@ -22,17 +21,15 @@
     display: flex;
     flex-direction: column;
     margin: auto;
+    margin-bottom: 3rem;
 }
 
-.coordonnees{
-    display: flex;
-    flex-direction: column;
-    max-width: 600px;
-    background-color: $primary-color;
-    padding: 1rem;
-    margin: auto;
-    margin-top: 2rem;
-    margin-bottom: 2rem;
-    border-radius: $radius;
+.recap{
+    text-align: center;
+    line-height: 1.5rem;
+    margin-bottom: 3rem;
+}
 
+.panier{
+    margin-bottom: 3rem;
 }
