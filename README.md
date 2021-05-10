@@ -28,3 +28,13 @@ Planifiez une suite de tests unitaires pour **couvrir au minimum 80 %** de la ba
 
 ## Technologies utilisées
 HTML, CSS, JavaScript.
+
+## Travail réalisé
+### Page accueil
+![page accueil](https://github.com/CarolineSenes/SENESCaroline_5_17042021/blob/master/assets/images/ipad_accueil.PNG)
+### Page produit
+![page produit](https://github.com/CarolineSenes/SENESCaroline_5_17042021/blob/master/assets/images/ipad_produit.PNG)
+### Page panier
+![page panier](https://github.com/CarolineSenes/SENESCaroline_5_17042021/blob/master/assets/images/ipad_panier.PNG)
+### Page confirmation
+![page confirmation](https://github.com/CarolineSenes/SENESCaroline_5_17042021/blob/master/assets/images/ipad_confirmation.PNG)
