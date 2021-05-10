@@ -1,18 +1,26 @@
-//On récupère les données de l'API au format JSON
-fetch('http://localhost:3000/api/cameras')
+const url = 'http://localhost:3000/api/cameras';
+const htmlCatalogue = document.getElementById('catalogue');
+
+//On récupère les données de l'API
+fetch(url)
     .then(function(res){
-        return res.json()
+        if(res.ok){
+            console.log('Connexion API :', res.ok)
+            return res.json();
+        }    
     })
     //On récupère les produits
     .then(function(produits){
+        console.log(`Nombre de produits récupérés de l'API :`, produits.length)
+
         for(let produit of produits){
+        console.log(`Informations de chaque article :`, produit)
 
 	    //Conversion du prix
 		let entierPrice = produit.price /100
-  		//let finalPrice = new Intl.NumberFormat('fr-FR', { style: 'currency', currency: 'EUR' }).format(entierPrice)
 
 	    //On intègre le HTML
-		document.getElementById("catalogue").innerHTML += 
+		htmlCatalogue.innerHTML += 
         `<article class="card">
             <a href="./pages/produit.html?given_id=${produit._id}" id="article__link">
                 <img src=${produit.imageUrl} alt="${produit.name}" id="article__img" />
@@ -25,5 +33,6 @@ fetch('http://localhost:3000/api/cameras')
         }
     })
     .catch(function(error) {
-        alert('Ressource non trouvée')
+        window.location.href = 'pages/404.html';
     })
+

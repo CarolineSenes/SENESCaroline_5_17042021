@@ -1,25 +1,31 @@
 //On récupère l'ID dans l'URL
 const parametresUrl = new URLSearchParams(window.location.search) 
 const produitId = parametresUrl.get("given_id") 
-console.log(`L'id du produit est :`, produitId)
+console.log(`Id du produit :`, produitId)
 
+const url = `http://localhost:3000/api/cameras/${produitId}`;
 
-//On récupère le produit au format JSON
-fetch(`http://localhost:3000/api/cameras/${produitId}`)
-    .then(function(data){
-        return data.json()
+const htmlProduit = document.getElementById("produit");
+
+//On récupère le produit
+fetch(url)
+    .then(function(res){
+        if(res.ok){
+        console.log('Connexion API :', res.ok)
+        return res.json()
+        }
     })
 
     //On récupère le produit
     .then(function(article){
-        console.log(`Les data du produits sont :`, article)
+        console.log(`Produit récupéré :`, article)
 
 	    //Conversion du prix
 		let entierPrice = article.price /100
   		//let finalPrice = new Intl.NumberFormat('fr-FR', { style: 'currency', currency: 'EUR' }).format(entierPrice)
 
 	    //On intègre le HTML
-        document.getElementById("produit").innerHTML += 
+        htmlProduit.innerHTML += 
         `<form class="card card--produit">
             <img src=${article.imageUrl} alt="${article.name}">
             <div id="carte_produit" class="card__texte card__texte--produit">
@@ -36,17 +42,16 @@ fetch(`http://localhost:3000/api/cameras/${produitId}`)
 
 
         //PERSONNALISATION
-
-        console.log(`La liste des options est :`, article.lenses)
-
         //On intègre chaque option de lentilles (=data lenses) dans le HTML
-        article.lenses.forEach(option =>{
-            console.log(`Choix d'option :`, option)
-            document.getElementById("lentilles").innerHTML += 
+        const htmlOptions = document.getElementById("lentilles");
+
+        article.lenses.forEach(function(option){
+            console.log(`Option :`, option)
+            htmlOptions.innerHTML += 
             `<option value="${option}">${option}</option>`
         }) 
-
         
+
         //RECUPERATION DES CHOIX UTILISATEUR
 
         document
@@ -64,13 +69,14 @@ fetch(`http://localhost:3000/api/cameras/${produitId}`)
                 price : entierPrice,
                 lentilles : optionLentille,
             }
-            console.log(`Les options :`, panierObjet);
+            console.log(`Produit ajouté au panier :`, panierObjet);
 
 
             //LOCALSTORAGE
 
-            //Stocker dans une variable les valeurs récupérées dans le localStorage en convertissant les données en JS
-            let produitsValues = JSON.parse(localStorage.getItem("produits"));
+            //Stocker dans une variable, les clés/valeurs du localStorage + conversion JSON->Objet JS
+            let produitEnregistreDansLocalStorage = JSON.parse(localStorage.getItem("produits"));
+            console.log('null si localStorage vide :', produitEnregistreDansLocalStorage)
 
             //fonction pop up
             const popupConfirmation = function(){
@@ -83,32 +89,31 @@ fetch(`http://localhost:3000/api/cameras/${produitId}`)
                 }
             }
 
-            //fonction pour ajouter produit dans localStorage
-                //on push les valeurs de la variable panierObjet dans le tableau déjà créé
-                //on stocke le tableau des valeurs dans le localStorage en convertissant les données en string
+            //Ajouter produit dans localStorage
             const ajoutProduitLocalStorage = function(){
-                produitsValues.push(panierObjet);
-                localStorage.setItem("produits", JSON.stringify(produitsValues));
+                //on push les valeurs de l'objet panierObjet dans le tableau déjà créé ligne 109
+                produitEnregistreDansLocalStorage.push(panierObjet); 
+                //on stocke le tableau des valeurs dans le localStorage (au format JSON) pour garder contenu du panier
+                localStorage.setItem("produits", JSON.stringify(produitEnregistreDansLocalStorage));
             }
 
             //S'il y A déjà des produits dans le localStorage, condition sera true
-            if(produitsValues){
+            if(produitEnregistreDansLocalStorage){
+                console.log(`Le localStorage n'est pas vide`)
                 ajoutProduitLocalStorage();
                 popupConfirmation();
 
             // S'il n'y a PAS de produits enregistrés dans le localStorage, condition sera false   
             }else{
-                //on créé un tableau vide pour y mettre les valeurs de la variable panierObjet
-                produitsValues = [];
+                //on créé un tableau vide
+                produitEnregistreDansLocalStorage = [];
+                console.log('Le localStorage est vide :', produitEnregistreDansLocalStorage)
                 ajoutProduitLocalStorage();
                 popupConfirmation();
-
             }
-
         })
     })
-
-    .catch(function(error) {
-        alert('Ressource non trouvée')
+    .catch(function() {
+        window.location.href = '404.html';
     })
 
