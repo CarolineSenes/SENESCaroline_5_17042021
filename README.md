@@ -29,6 +29,9 @@ Planifiez une suite de tests unitaires pour **couvrir au minimum 80 %** de la ba
 ## Technologies utilisées
 HTML, CSS, JavaScript.
 
+## Documentation
+[Spécifications fonctionnelles et techniques complètes](https://s3-eu-west-1.amazonaws.com/course.oc-static.com/projects/DWJ_FR_P5/P5_Spe%CC%81cifications%20fonctionnelles%20Orinoco%20%282%29.pdf)
+
 ## Travail réalisé
 ### Page accueil
 ![page accueil](https://github.com/CarolineSenes/SENESCaroline_5_17042021/blob/master/assets/images/ipad_accueil.PNG)
