@@ -25,11 +25,12 @@ if(panier === null){
         console.log('Informations de chaque produit :', article);
         //on intègre le HTML pour chacun
         htmlRecapPanier.innerHTML += 
-        `<div class="card__texte card__texte--produit card__texte--panier">
-                <h2>${article.name}</h2>
-                <p>${article.lentilles}</p>
-                <p>${article.price} €</p>
-        </div>`;
+        `<tr>
+            <th scope="row">${article.name}</th>
+            <td>${article.lentilles}</td>
+            <td>${article.price} €</td>
+            <td><button type="button" class="btn btn-dark">Supprimer</button></td>
+        </tr>`
     }
 }
 
@@ -57,45 +58,49 @@ let totalPanier = [];
 
     //On intègre le HTML
     htmlTotalPanier.innerHTML += 
-    `<div class="card__texte card__texte--produit">
-        <p>Total du panier = ${prixTotal} €</p>
-    </div>`;
+    `<tr>
+        <th scope="row">Total panier</th>
+        <td></td>
+        <td class="fw-bold">${prixTotal} €</td>
+        <td><button type="button" class="btn btn-light">Vider le panier</button></td>
+    </tr>`;
+
 
 //////////////////////////////////////////// FORMULAIRE COMMANDE ////////////////////////////////////////
 const htmlCoordonnees= document.getElementById("coordonnees")
 
 //On intègre le HTML
 htmlCoordonnees.innerHTML += 
-    `<form action="" method="POST" class="formulaire" id="formulaireCommande">
-    <h2>Saisissez vos coordonnées :</h2>
-        <div class="champs">
-            <label for="nom">Votre nom : </label><small id='messageNom' class='text-danger'></small>
-            <input type="text" id="lastName" name="lastName" required>
-        </div>
+    `<form class="row mt-4 g-2 shadow p-5 bg-light border" action="" method="POST" id="formulaireCommande">
+    <h2>Vos coordonnées</h1>
+    <p class="fst-italic fs-6">Merci de compléter tous les champs</p>
+    <div class="col-md-6">
+        <label for="lastName" class="form-label">Nom</label><small id='messageNom' class='text-danger'></small>
+        <input type="text" class="form-control" name="lastName" aria-label="nom" id="lastName" required>
+    </div>
+    <div class="col-md-6">
+        <label for="firstName" class="form-label">Prénom </label><small id='messagePrenom' class='text-danger'></small>
+        <input type="text" class="form-control" name="firstName" aria-label="prénom" id="firstName" required>
+    </div>
+    <div class="col-12">
+        <label for="email" class="form-label">Email </label><small id='messageEmail' class='text-danger'></small>
+        <input type="email" class="form-control" id="email" name="email" required>
+    </div>
+    <div class="col-12">
+        <label for="address" class="form-label">Adresse </label><small id='messageAdresse' class='text-danger'></small>
+        <input type="text" class="form-control" id="address" name="address" required>
+    </div>
+    <div class="col-md-6">
+        <label for="city" class="form-label">Ville </label><small id='messageVille' class='text-danger'></small>
+        <input type="text" class="form-control" id="city" name="city" required>
+    </div>
+    <div class="col-12">
+    </div>
+    <div class="col-12">
+      <button type="submit" class="btn btn-dark">Valider ma commande</button>
+    </div>
+</form>`;
 
-        <div class="champs">
-            <label for="prenom">Votre prénom : </label><small id='messagePrenom' class='text-danger'></small>
-            <input type="text" id="firstName" name="firstName" required>
-        </div>
-
-        <div class="champs">
-            <label for="email">Votre adresse email : </label><small id='messageEmail' class='text-danger'></small>
-            <input type="email" id="email" name="email" required>
-            <small></small>
-        </div>
-
-        <div class="champs">
-            <label for="rue">Votre adresse : </label><small id='messageAdresse' class='text-danger'></small>
-            <input type="text" id="address" name="address" required>
-        </div>
-
-        <div class="champs">
-            <label for="ville">Votre ville : </label><small id='messageVille' class='text-danger'></small>
-            <input type="text" id="city" name="city" required>
-        </div>
-
-        <button type="submit" id="order" name="order" class="btn btn--formulaire">Valider ma commande</button>
-    </form>`;
 
 //VALIDATION
 ///définition des regex
@@ -117,7 +122,7 @@ function dataChampManquantTextVide(e){
 };
 
 function dataChampManquantText(e){
-    document.querySelector(`#${e}`).textContent = "Le format de ce champ n'est pas correct";
+    document.querySelector(`#${e}`).textContent = " Le format de ce champ n'est pas correct";
 };
 
 

@@ -22,21 +22,20 @@ fetch(url)
 
 	    //Conversion du prix
 		let entierPrice = article.price /100
-  		//let finalPrice = new Intl.NumberFormat('fr-FR', { style: 'currency', currency: 'EUR' }).format(entierPrice)
 
 	    //On intègre le HTML
         htmlProduit.innerHTML += 
-        `<form class="card card--produit">
-            <img src=${article.imageUrl} alt="${article.name}">
-            <div id="carte_produit" class="card__texte card__texte--produit">
-                <h2>${article.name}</h2>
-                <p>${article.description}</p>
+        `<form class="card shadow border-light">
+            <img src=${article.imageUrl} class="card-img-top" alt="${article.name}">
+            <div class="card-body">
+                <h5 class="card-title">${article.name}</h5>
+                <p class="card-text">${article.description}</p>
                 <p>
                     <label for="lentilles">Personnalisation de lentille : </label>
                     <select name="lentilles" id="lentilles"></select>
                 </p>    
                 <p>${entierPrice} €</p>
-                <button type="submit" id="ajoutPanier" class="btn btn--panier">Ajouter au panier</button>
+                <button type="submit" id="ajoutPanier" class="btn btn-dark">Ajouter au panier</button>
             </div>
         </form>`
 

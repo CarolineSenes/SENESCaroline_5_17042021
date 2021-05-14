@@ -14,9 +14,14 @@ console.log('prixTotal :', prixTotal)
 
 //On intègre le HTML
     document.getElementById("recap").innerHTML += 
-        `<p>Merci ${firstName}</p>
-        <p class="commande">Votre commande d'un montant de ${prixTotal}€ a été enregistrée !</p>
-        <p>Elle porte le numéro : ${id}</p>`
+        `<div class="card text-center">
+            <h5 class="card-header bg-dark text-white">Merci ${firstName}</h5>
+            <div class="card-body">
+            <h5 class="card-title">Votre commande d'un montant de ${prixTotal}€ a été enregistrée !</h5>
+            <p class="card-text">Elle porte le numéro : ${id}</p>
+            <a href="../index.html" class="btn btn-warning">Revenir à l'accueil</a>
+            </div>
+        </div>`
     ;
 
 //On vide le localStorage
