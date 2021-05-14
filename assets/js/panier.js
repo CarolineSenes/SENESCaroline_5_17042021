@@ -20,6 +20,7 @@ if(panier === null){
 }else{
     console.log('Le panier n\'est PAS vide');
 
+
     //On récupère les produits
     for (let article of panier){
         console.log('Informations de chaque produit :', article);
@@ -29,11 +30,10 @@ if(panier === null){
             <th scope="row">${article.name}</th>
             <td>${article.lentilles}</td>
             <td>${article.price} €</td>
-            <td><button type="button" class="btn btn-dark">Supprimer</button></td>
+            <td><button type="button" class="btn btn-dark btn-supprimer-article">Supprimer</button></td>
         </tr>`
     }
 }
-
 
 //////////////////////////////////////////////// TOTAL DU PANIER /////////////////////////////////////////
 const htmlTotalPanier = document.getElementById("total-panier")
@@ -62,8 +62,23 @@ let totalPanier = [];
         <th scope="row">Total panier</th>
         <td></td>
         <td class="fw-bold">${prixTotal} €</td>
-        <td><button type="button" class="btn btn-light">Vider le panier</button></td>
+        <td><button type="button" class="btn btn-light btn-suppr-panier">Vider le panier</button></td>
     </tr>`;
+
+
+//////////////////////////////////////// BOUTON VIDER PANIER ////////////////////////////////////
+//On séléctionne le bouton Vider Panier
+document
+    .querySelector('.btn-suppr-panier')
+    .addEventListener('click', function(e){
+        e.preventDefault()
+
+        //On supprime la key "produits" du localStorage
+        localStorage.removeItem("produits")
+
+        //On recharge pa page
+        window.location.reload()
+});
 
 
 //////////////////////////////////////////// FORMULAIRE COMMANDE ////////////////////////////////////////
