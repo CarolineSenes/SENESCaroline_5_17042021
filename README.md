@@ -33,11 +33,9 @@ HTML, CSS, JavaScript.
 [Spécifications fonctionnelles et techniques complètes](https://s3-eu-west-1.amazonaws.com/course.oc-static.com/projects/DWJ_FR_P5/P5_Spe%CC%81cifications%20fonctionnelles%20Orinoco%20%282%29.pdf)
 
 ## Travail réalisé
-### Page accueil
-![page accueil](https://github.com/CarolineSenes/SENESCaroline_5_17042021/blob/master/assets/images/ipad_accueil.PNG)
-### Page produit
-![page produit](https://github.com/CarolineSenes/SENESCaroline_5_17042021/blob/master/assets/images/ipad_produit.PNG)
-### Page panier
-![page panier](https://github.com/CarolineSenes/SENESCaroline_5_17042021/blob/master/assets/images/ipad_panier.PNG)
-### Page confirmation
-![page confirmation](https://github.com/CarolineSenes/SENESCaroline_5_17042021/blob/master/assets/images/ipad_confirmation.PNG)
+### Visuels sur Desktop
+![desktop](https://github.com/CarolineSenes/SENESCaroline_5_17042021/blob/master/assets/images/desktop.jpg)
+### Visuels sur iPad
+![iPad](https://github.com/CarolineSenes/SENESCaroline_5_17042021/blob/master/assets/images/ipad.jpg)
+### Visuels sur iPhone
+![iPhone](https://github.com/CarolineSenes/SENESCaroline_5_17042021/blob/master/assets/images/iphone.jpg)
