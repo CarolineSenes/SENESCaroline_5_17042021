@@ -31,8 +31,12 @@ fetch(url)
                 <h5 class="card-title">${article.name}</h5>
                 <p class="card-text">${article.description}</p>
                 <p>
-                    <label for="lentilles">Personnalisation de lentille : </label>
+                    <label for="lentilles">Objectif : </label>
                     <select name="lentilles" id="lentilles"></select>
+                </p>    
+                <p>
+                    <label for="quantite">Quantité : </label>
+                    <input type="number" name="quantité" id="quantite" min="1" max="10" value="1"></input>
                 </p>    
                 <p>${entierPrice} €</p>
                 <button type="submit" id="ajoutPanier" class="btn btn-dark">Ajouter au panier</button>
@@ -59,6 +63,8 @@ fetch(url)
                 e.preventDefault()
                 let optionLentille = e.target.lentilles.value
                 console.log(`Option sélectionnée :`, optionLentille)
+                let choixQuantite = e.target.quantite.value
+                console.log(`Quantité choisie :`, choixQuantite)
 
             //Récupération des valeurs du formulaire dans un objet
             let panierObjet = {
@@ -67,6 +73,8 @@ fetch(url)
                 name : article.name,
                 price : entierPrice,
                 lentilles : optionLentille,
+                quantite : choixQuantite,
+                prixArticleTotal : entierPrice * choixQuantite,
             }
             console.log(`Produit ajouté au panier :`, panierObjet);
 
