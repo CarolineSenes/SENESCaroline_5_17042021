@@ -1,1 +1,5 @@
-$headings-font-family: "Times New Roman";
+.logo{
+    @media screen and (max-width: 576px){
+        width: 200px;
+    }
+}

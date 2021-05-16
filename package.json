@@ -4,7 +4,7 @@
   "description": "![logo Orinoco](https://github.com/CarolineSenes/SENESCaroline_5_17042021/blob/master/assets/images/logo_orinoco.png) # Construire un site e-commerce",
   "main": "index.js",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "sass": "sass --watch ./scss/style.scss:./css/style.css --style compressed"
   },
   "author": "",
   "license": "ISC",
