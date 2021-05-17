@@ -20,16 +20,16 @@
           <a class="navbar-brand" href="../index.html">
             <img src="../assets/images/logo_orinoco.png" class="logo rounded-3" alt="Orinoco Logo" />
           </a>
-          <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+          <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarToggleExternalContent" aria-controls="navbarToggleExternalContent" aria-expanded="false" aria-label="Toggle navigation">
             <span class="navbar-toggler-icon"></span>
           </button>
-          <div id="navbarContent" class="collapse navbar-collapse text-end">
+          <div id="navbarToggleExternalContent" class="collapse navbar-collapse text-end">
             <ul class="navbar-nav">
               <li class="nav-item">
                 <a class="nav-link" href="../index.html">Accueil</a>
               </li>
-              <li class="nav-item active">
-                <a class="nav-link" href="panier.html">Panier</a>
+              <li class="nav-item">
+                <a class="nav-link active" href="panier.html">Panier</a>
               </li>
             </ul>
           </div>
@@ -39,15 +39,14 @@
   </header>
 
   <main class="container">
-    <section class="row my-4">
-      <div class="col">
-        <h1>Votre panier</h1>
-      </div>  
-    </section>
 
     <!-- panier -->
-    <section class="row cart-items">
-        <div class="table-responsive px-0 px-sm-2">
+    <section class="row cart-items my-4">
+        <div class="col">
+          <h1>Votre panier</h1>
+        </div>  
+
+        <div class="table-responsive px-0 px-sm-2 mt-3">
             <table class="table border-gray text-center table-sm small align-middle">
                 <thead class="table-dark">
                 <tr>
@@ -68,6 +67,10 @@
 
     <!-- formulaire de commande -->
     <section id="coordonnees">
+      <form class="row mt-4 g-2 shadow p-2 p-md-5 bg-light border" action="#" method="POST" id="formulaireCommande">
+        <h2>Vos coordonnées</h2>
+        <p class="fst-italic fs-6">Merci de compléter tous les champs</p>
+      </form>
     </section>
 
   </main>

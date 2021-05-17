@@ -55,7 +55,7 @@ fetch(url)
         }) 
         
 
-        //RECUPERATION DES CHOIX UTILISATEUR
+        //RECUPERATION DES CHOIX UTILISATEUR AU CLIC SUR AJOUTER AU PANIER
 
         document
             .querySelector('form')
@@ -98,7 +98,7 @@ fetch(url)
 
             //Ajouter produit dans localStorage
             const ajoutProduitLocalStorage = function(){
-                //on push les valeurs de l'objet panierObjet dans le tableau déjà créé ligne 109
+                //on push les valeurs de l'objet panierObjet dans le tableau déjà créé ligne 116
                 produitEnregistreDansLocalStorage.push(panierObjet); 
                 //on stocke le tableau des valeurs dans le localStorage (au format JSON) pour garder contenu du panier
                 localStorage.setItem("produits", JSON.stringify(produitEnregistreDansLocalStorage));

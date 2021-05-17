@@ -80,14 +80,11 @@ document
 
 
 //////////////////////////////////////////// FORMULAIRE COMMANDE ////////////////////////////////////////
-const htmlCoordonnees= document.getElementById("coordonnees")
+const htmlFormulaireCommande= document.getElementById("formulaireCommande")
 
 //On intègre le HTML
-htmlCoordonnees.innerHTML += 
-    `<form class="row mt-4 g-2 shadow p-2 p-md-5 bg-light border" action="" method="POST" id="formulaireCommande">
-    <h2>Vos coordonnées</h1>
-    <p class="fst-italic fs-6">Merci de compléter tous les champs</p>
-    <div class="col-md-6">
+htmlFormulaireCommande.innerHTML += 
+    `<div class="col-md-6">
         <label for="lastName" class="form-label">Nom</label><small id='messageNom' class='text-danger'></small>
         <input type="text" class="form-control" name="lastName" aria-label="nom" id="lastName" required>
     </div>
@@ -111,8 +108,7 @@ htmlCoordonnees.innerHTML +=
     </div>
     <div class="col-12">
       <button type="submit" class="btn btn-dark">Valider ma commande</button>
-    </div>
-</form>`;
+    </div>`;
 
 
 //VALIDATION
