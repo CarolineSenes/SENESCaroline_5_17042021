@@ -23,10 +23,10 @@ fetch(url)
 		htmlCatalogue.innerHTML += 
         `<article class="col card-group">
             <div class="card mb-4 mb-lg-0 shadow">
-                <a href="./pages/produit.html?given_id=${produit._id}" class="stretched-link" id="article__link"></a>
-                <img src=${produit.imageUrl} alt="${produit.name}" class="card-img-top h-100">
+                <a href="./pages/produit.html?given_id=${produit._id}" class="stretched-link"></a>
+                <img src=${produit.imageUrl} alt="${produit.name}" class="card-img-top">
                 <div class="card-body">
-                    <h5 class="card-title">${produit.name}</h5>
+                    <h3 class="card-title fs-5">${produit.name}</h3>
                     <p class="card-text">${entierPrice} €</p>
                 </div>
             </div>

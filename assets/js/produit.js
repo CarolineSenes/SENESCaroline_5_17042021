@@ -28,7 +28,7 @@ fetch(url)
         `<form class="card shadow border-light">
             <img src=${article.imageUrl} class="card-img-top" alt="${article.name}">
             <div class="card-body">
-                <h5 class="card-title">${article.name}</h5>
+                <h2 class="card-title fs-5">${article.name}</h2>
                 <p class="card-text">${article.description}</p>
                 <p>
                     <label for="lentilles">Objectif : </label>

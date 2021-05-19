@@ -66,66 +66,69 @@ htmlTotalPanier.innerHTML +=
 
 //////////////////////////////////////// BOUTON VIDER PANIER ////////////////////////////////////
 //On séléctionne le bouton Vider Panier
-document
-    .querySelector('.btn-suppr-panier')
-    .addEventListener('click', function(e){
-        e.preventDefault()
+const boutonViderPanier = document.querySelector('.btn-suppr-panier')
 
-        //On supprime la key "produits" du localStorage
-        localStorage.removeItem("produits")
+boutonViderPanier.addEventListener('click', function(e){
+    e.preventDefault()
 
-        //On recharge pa page
-        window.location.reload()
+    //On supprime la key "produits" du localStorage
+    localStorage.removeItem("produits")
+
+    //On recharge pa page
+    window.location.reload()
 });
 
-
 //////////////////////////////////////////// FORMULAIRE COMMANDE ////////////////////////////////////////
-const htmlFormulaireCommande= document.getElementById("formulaireCommande")
+const htmlCoordonnees= document.getElementById("coordonnees")
 
 //On intègre le HTML
-htmlFormulaireCommande.innerHTML += 
-    `<div class="col-md-6">
-        <label for="lastName" class="form-label">Nom</label><small id='messageNom' class='text-danger'></small>
-        <input type="text" class="form-control" name="lastName" aria-label="nom" id="lastName" required>
-    </div>
-    <div class="col-md-6">
-        <label for="firstName" class="form-label">Prénom </label><small id='messagePrenom' class='text-danger'></small>
-        <input type="text" class="form-control" name="firstName" aria-label="prénom" id="firstName" required>
-    </div>
-    <div class="col-12">
-        <label for="email" class="form-label">Email </label><small id='messageEmail' class='text-danger'></small>
-        <input type="email" class="form-control" id="email" name="email" required>
-    </div>
-    <div class="col-12">
-        <label for="address" class="form-label">Adresse </label><small id='messageAdresse' class='text-danger'></small>
-        <input type="text" class="form-control" id="address" name="address" required>
-    </div>
-    <div class="col-md-6">
-        <label for="city" class="form-label">Ville </label><small id='messageVille' class='text-danger'></small>
-        <input type="text" class="form-control" id="city" name="city" required>
-    </div>
-    <div class="col-12">
-    </div>
-    <div class="col-12">
-      <button type="submit" class="btn btn-dark">Valider ma commande</button>
-    </div>`;
+htmlCoordonnees.innerHTML += 
+    `<form class="row mt-4 g-2 shadow p-2 p-md-5 bg-light border" action="#" method="POST" id="formulaireCommande">
+        <h2>Vos coordonnées</h2>
+        <p class="fst-italic fs-6">Merci de compléter tous les champs</p>
+        <div class="col-md-6">
+            <label for="lastName" class="form-label">Nom</label><small id='messageNom' class='text-danger'></small>
+            <input type="text" class="form-control" name="lastName" aria-label="nom" id="lastName" required>
+        </div>
+        <div class="col-md-6">
+            <label for="firstName" class="form-label">Prénom </label><small id='messagePrenom' class='text-danger'></small>
+            <input type="text" class="form-control" name="firstName" aria-label="prénom" id="firstName" required>
+        </div>
+        <div class="col-12">
+            <label for="email" class="form-label">Email </label><small id='messageEmail' class='text-danger'></small>
+            <input type="text" class="form-control" id="email" name="email" required>
+        </div>
+        <div class="col-12">
+            <label for="address" class="form-label">Adresse </label><small id='messageAdresse' class='text-danger'></small>
+            <input type="text" class="form-control" id="address" name="address" required>
+        </div>
+        <div class="col-md-6">
+            <label for="city" class="form-label">Ville </label><small id='messageVille' class='text-danger'></small>
+            <input type="text" class="form-control" id="city" name="city" required>
+        </div>
+        <div class="col-12">
+        </div>
+        <div class="col-12">
+        <button type="submit" class="btn btn-dark">Valider ma commande</button>
+        </div>
+    </form>`;
 
 
 //VALIDATION
 ///définition des regex
-const regExPrenomNomVille = function(value){
+const alphaRegex = function(value){
     return /^[a-zéèàêâùïüëA-Z-\s\']{3,30}$/.test(value);
 };
 
-const regExEmail = function(value){
+const emailRegex = function(value){
     return /^[a-zA-Z0-9_.-]+[@]{1}[a-zA-Z0-9_.-]+[.]{1}[a-zA-Z]{2,10}$/.test(value);
 };
 
-const regExAdresse = function(value){
+const alphaNumRegex = function(value){
     return /^[a-zéèàêâùïüëA-Z0-9-\s\,\']{5,50}$/.test(value);
 };
 
-///définition des textes d'erreurs
+//définition des textes d'erreurs
 function dataChampManquantTextVide(e){
     document.querySelector(`#${e}`).textContent = "";
 };
@@ -149,10 +152,9 @@ document
             city : document.getElementById("city").value,
         };
 
-        ///On teste les champs
         function lastNameControl(){
             const nom = contact.lastName;
-            if(regExPrenomNomVille(nom)){
+            if(alphaRegex(nom)){
                 dataChampManquantTextVide("messageNom");
                 return true;
             }else{
@@ -163,7 +165,7 @@ document
 
         function firstNameControl(){
             const prenom = contact.firstName;
-            if(regExPrenomNomVille(prenom)){
+            if(alphaRegex(prenom)){
                 dataChampManquantTextVide("messagePrenom");
                 return true;
             }else{
@@ -174,7 +176,7 @@ document
 
         function emailControl(){
             const email = contact.email;
-            if(regExEmail(email)){
+            if(emailRegex(email)){
                 dataChampManquantTextVide("messageEmail");
                 return true;
             }else{
@@ -185,7 +187,7 @@ document
 
         function adressControl(){
             const adresse = contact.address;
-            if(regExAdresse(adresse)){
+            if(alphaNumRegex(adresse)){
                 dataChampManquantTextVide("messageAdresse");
                 return true;
             }else{
@@ -196,7 +198,7 @@ document
 
         function cityControl(){
             const ville = contact.city;
-            if(regExPrenomNomVille(ville)){
+            if(alphaRegex(ville)){
                 dataChampManquantTextVide("messageVille");
                 return true;
             }else{

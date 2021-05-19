@@ -15,9 +15,9 @@ console.log('prixTotal :', prixTotal)
 //On intègre le HTML
     document.getElementById("recap").innerHTML += 
         `<div class="card text-center">
-            <h5 class="card-header bg-dark text-white">Merci ${firstName}</h5>
+            <h2 class="card-header bg-dark text-white fs-5">Merci ${firstName}</h2>
             <div class="card-body">
-            <h5 class="card-title">Votre commande d'un montant de ${prixTotal}€ a été enregistrée !</h5>
+            <h3 class="card-title fs-5">Votre commande d'un montant de ${prixTotal}€ a été enregistrée !</h3>
             <p class="card-text">Elle porte le numéro : ${id}</p>
             <a href="../index.html" class="btn btn-warning">Revenir à l'accueil</a>
             </div>
