@@ -207,6 +207,7 @@ document
             }
         };
         
+        
         ///Contrôle validité formulaire avant envoi dans localStorage
         if(lastNameControl() && firstNameControl() && emailControl() && adressControl() && cityControl()){
             //On appelle la fonction de POST
