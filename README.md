@@ -32,6 +32,16 @@ HTML, CSS, JavaScript.
 ## Documentation
 [Spécifications fonctionnelles et techniques complètes](https://s3-eu-west-1.amazonaws.com/course.oc-static.com/projects/DWJ_FR_P5/P5_Spe%CC%81cifications%20fonctionnelles%20Orinoco%20%282%29.pdf)
 
+## Lancement de l'application
+### Prérequis ###
+
+Vous devez avoir Node et `npm` installer sur votre machine en local.
+
+### Installation ###
+
+Cloner ce repo et celui du backend (lien disponible dans la documentation). A partir du dossier Backend, lancer `npm install`. Vous pouvez lancer le serveur avec `node server`. 
+Le serveur démarrera sur `localhost` avec par défaut le port `3000`.
+
 ## Travail réalisé
 ### Visuels responsive page Accueil
 ![accueil](https://github.com/CarolineSenes/SENESCaroline_5_17042021/blob/master/assets/images/page1.jpg)
