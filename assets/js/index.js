@@ -1,8 +1,7 @@
 const htmlCatalogue = document.getElementById('catalogue');
 
 //On récupère les données de l'API
-// fetch(`${apiUrl}/api/cameras`)
-fetch(`https://orinoco-app-ecommerce.herokuapp.com/api/cameras`)
+fetch(`${apiUrl}/api/cameras`)
     .then(function(res){
         if(res.ok){
             console.log('Connexion API :', res.ok)
