@@ -96,7 +96,7 @@ htmlCoordonnees.innerHTML +=
         </div>
         <div class="col-12">
             <label for="email" class="form-label">Email </label><small id='messageEmail' class='text-danger'></small>
-            <input type="text" class="form-control" id="email" name="email" required>
+            <input type="email" class="form-control" id="email" name="email" required>
         </div>
         <div class="col-12">
             <label for="address" class="form-label">Adresse </label><small id='messageAdresse' class='text-danger'></small>
@@ -121,7 +121,7 @@ const alphaRegex = function(value){
 };
 
 const emailRegex = function(value){
-    return /^[a-zA-Z0-9_.-]+[@]{1}[a-zA-Z0-9_.-]+[.]{1}[a-zA-Z]{2,10}$/.test(value);
+    return /^[a-zA-Z0-9_.-]+[@]{1}[a-zA-Z0-9]+[.]{1}[a-zA-Z]{2,10}$/.test(value);
 };
 
 const alphaNumRegex = function(value){

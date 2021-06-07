@@ -1,20 +1,21 @@
-const url = 'http://localhost:3000/api/cameras';
+// const url = 'http://localhost:3000/api/cameras';
 const htmlCatalogue = document.getElementById('catalogue');
 
 //On récupère les données de l'API
-fetch(url)
+
+fetch(`${apiUrl}/api/cameras`)
     .then(function(res){
         if(res.ok){
             console.log('Connexion API :', res.ok)
             return res.json();
         }    
     })
-    //On récupère les produits
-    .then(function(produits){
-        console.log(`Nombre de produits récupérés de l'API :`, produits.length)
+    //On récupère les produits dans la réponse
+    .then(function(res){
+        console.log(`Nombre de produits récupérés de l'API :`, res.length)
 
-        for(let produit of produits){
-        console.log(`Informations de chaque article :`, produit)
+        for(let produit of res){
+            console.log(`Informations de chaque article :`, produit)
 
 	    //Conversion du prix
 		let entierPrice = produit.price /100
@@ -33,6 +34,6 @@ fetch(url)
         </article>`
         }
     })
-    .catch(function(error) {
+    .catch(function() {
         window.location.href = 'pages/404.html';
     })
