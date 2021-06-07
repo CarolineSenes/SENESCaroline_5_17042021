@@ -3,12 +3,10 @@ const parametresUrl = new URLSearchParams(window.location.search)
 const produitId = parametresUrl.get("given_id") 
 console.log(`Id du produit :`, produitId)
 
-const url = `http://localhost:3000/api/cameras/${produitId}`;
-
 const htmlProduit = document.getElementById("produit");
 
 //On récupère le produit
-fetch(url)
+fetch(`${apiUrl}/api/cameras/${produitId}`)
     .then(function(res){
         if(res.ok){
         console.log('Connexion API :', res.ok)
