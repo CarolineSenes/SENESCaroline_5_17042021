@@ -32,7 +32,11 @@ HTML, CSS, JavaScript.
 ## Documentation
 [Spécifications fonctionnelles et techniques complètes](https://s3-eu-west-1.amazonaws.com/course.oc-static.com/projects/DWJ_FR_P5/P5_Spe%CC%81cifications%20fonctionnelles%20Orinoco%20%282%29.pdf)
 
-## Lancement de l'application
+## Lancement de l'application en ligne
+Le backend étant hébérgé sur Heroku, il est possible de tester l'application directement en ligne :
+[Tester l'application en ligne](https://carolinesenes.github.io/SENESCaroline_5_17042021/)
+
+## Lancement de l'application en local
 ### Prérequis ###
 
 Vous devez avoir Node et `npm` installer sur votre machine en local.
