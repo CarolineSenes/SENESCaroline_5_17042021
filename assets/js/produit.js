@@ -6,7 +6,7 @@ console.log(`Id du produit :`, produitId)
 const htmlProduit = document.getElementById("produit");
 
 //On récupère le produit
-fetch(`https://orinoco-app-ecommerce.herokuapp.com/api/cameras/${produitId}`)
+fetch(`${apiUrl}/api/cameras/${produitId}`)
     .then(function(res){
         if(res.ok){
         console.log('Connexion API :', res.ok)
