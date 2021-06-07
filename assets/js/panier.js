@@ -233,7 +233,7 @@ document
             console.log('Données à envoyer : ', aEnvoyer);
         
             //on envoie nos données au serveur
-            fetch(`https://orinoco-app-ecommerce.herokuapp.com/api/cameras/order`, {
+            fetch(`${apiUrl}/api/cameras/order`, {
                 method: "POST",
                 headers: {
                 "Content-Type": "application/json"
