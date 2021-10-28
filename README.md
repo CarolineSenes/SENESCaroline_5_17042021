@@ -1,5 +1,5 @@
 ![logo Orinoco](https://github.com/CarolineSenes/SENESCaroline_5_17042021/blob/master/assets/images/logo_orinoco.png)
-# Construire un site e-commerce
+# Développer le front-end d'un site e-commerce
 
 ## Mission
 Créer la partie frontend d'un premier MVP (Produit Minimum Viable) pour démontrer le fonctionnement de l'application.
